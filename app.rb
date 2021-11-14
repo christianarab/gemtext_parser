@@ -1,19 +1,13 @@
-file = File.open './text.gmi'
-
 module Gemtext
   module Parser
-    def self.parse(file)
-      parsed = []
-      file.each_line { |ln| parsed << ln.chomp }
-      parsed
+    def self.parse input
+      parsed_output = []
+      input.each_line { |ln| parsed_output << ln.chomp }
+      parsed_output
     end
 
-    def self.start(file)
-      if file.is_a? File then parse(file)
-      else raise Error
-      end
+    def self.start input
+      parse input
     end
   end
 end
-
-Gemtext::Parser.start(file)
