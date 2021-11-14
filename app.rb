@@ -1,4 +1,3 @@
-
 file = File.open './text.gmi'
 
 module Gemtext
@@ -6,7 +5,7 @@ module Gemtext
     def self.parse(file)
       parsed = []
       file.each_line { |ln| parsed << ln.chomp }
-      puts parsed.inspect
+      parsed
     end
 
     def self.start(file)
