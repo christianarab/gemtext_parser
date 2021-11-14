@@ -1,79 +1,114 @@
 module Seeds
   module Examples
-    @ex_1 = 
-    %q()
+@@example_hashes = []
 
-    @ex_2 = 
-    %q(
-    )
+# Example 1: I expect 2 elements in an array, 1th index as an 'empty' string.
+ex_1 = Hash.new
+ex_1["input"] = <<-STRING
+0th element
 
-    @ex_3 = 
-    %q(
+STRING
+ex_1["expected"] = ["0th element", ""]
+@@example_hashes << ex_1
 
-    )
+# Example 2: I expect " " as an array.
+ex_2 = Hash.new
+ex_2["input"] = <<-STRING
+ 
+STRING
+ex_2["expected"] = [" "]
+@@example_hashes << ex_2
 
-    @ex_4 = 
-    %q(
+# Example 3: I expect ["", ""] as an array.
+ex_3 = Hash.new
+ex_3["input"] = <<-STRING
 
 
+STRING
+ex_3["expected"] = ["", ""]
+@@example_hashes << ex_3
 
-    )
+# Example 4: I expect ["   ", "  ", " "] as an array.
+ex_4 = Hash.new
+ex_4["input"] = <<-STRING
+   
+  
+ 
+STRING
+ex_4["expected"] = ["   ", "  ", " "]
+@@example_hashes << ex_4
 
-    @ex_5 = 
-    %q(
+# Example 5: I expect ["", "# This is a level 1 heading", ""] as an array.
+ex_5 = Hash.new
+ex_5["input"] = <<-STRING
 
-    # This is a level 1 heading
+# This is a level 1 heading
 
-    )
+STRING
+ex_5["expected"] = ["", "# This is a level 1 heading", ""]
+@@example_hashes << ex_5
 
-    @ex_6 = 
-    %q(## This is a level 2 heading
-    )
+# Example 6: I expect ["","","# This is a level 1 heading","",""] as an array.
+ex_6 = Hash.new
+ex_6["input"] = <<-STRING
 
-    @ex_7 =
-    %q(
 
-    ## This is a level 2 heading
+# This is a level 1 heading
 
-    )
 
-    @ex_8 =
-    %q(
+STRING
+ex_6["expected"] = ["","","# This is a level 1 heading","",""]
+@@example_hashes << ex_6
 
-    # This is once
+# Example 7: I expect ["", "## This is a level 2 heading"] as an array.
+ex_7 = Hash.new
+ex_7["input"] = <<-STRING
+## This is a level 2 heading
+STRING
+ex_7["expected"] = ["## This is a level 2 heading"]
+@@example_hashes << ex_7
 
-    ## This is twice
+# Example 8: I expect ["", "", "# This is once", "", "## This is twice", "", 
+# "### This is thrice", "", "This is fource", "", "And then what is this?", ""] as an array.
+ex_8 = Hash.new
+ex_8["input"] = <<-STRING
 
-    ### This is thrice
 
-    This is fource
+# This is once
 
-    And then what is this?
+## This is twice
 
-    )
+### This is thrice
 
-    @ex_9 =
-    %q(Hello world!
-    => apple/default.gmni  🗀 A is for Apple
-    => banana/default.gmni 🗀 B is for Banana
-    => cherry/default.gmni 🗀 C is for Cherry)
+This is fource
 
-    @ex_10 =
-    %q(
+And then what is this?
 
-      # Title
-      
-      This is some text.
-      
-      This is more text.
-      
-      * apple
-      * banana
-      * cherry
-      
-      => https://github.com/reiver @reiver
-      )
+STRING
+ex_8["expected"] = ["", "", "# This is once", "", "## This is twice", "", 
+                  "### This is thrice", "", "This is fource", "", "And then what is this?", ""]
+@@example_hashes << ex_8
 
-    @@example_array = [@ex_1, @ex_2, @ex_3, @ex_4, @ex_5, @ex_6, @ex_7, @ex_8, @ex_9, @ex_10]
+# Example 9: I expect ["Hello world!", "=> apple/default.gmni  🗀 A is for Apple", "=> banana/default.gmni 🗀 B is for Banana", 
+# "=> cherry/default.gmni 🗀 C is for Cherry"] as an array.
+ex_9 = Hash.new
+ex_9["input"] = <<-STRING
+Hello world!
+=> apple/default.gmni  🗀 A is for Apple
+=> banana/default.gmni 🗀 B is for Banana
+=> cherry/default.gmni 🗀 C is for Cherry
+STRING
+ex_9["expected"] = ["Hello world!", "=> apple/default.gmni  🗀 A is for Apple", "=> banana/default.gmni 🗀 B is for Banana", 
+                    "=> cherry/default.gmni 🗀 C is for Cherry"] 
+@@example_hashes << ex_9
+
+# Example 10: I expect ["Gemini is ruled by Mercury", "My 12th house is Gemini"] as an array
+ex_10 = Hash.new
+ex_10["input"] = <<-STRING
+Gemini is ruled by Mercury
+My 12th house is Gemini
+STRING
+ex_10["expected"] = ["Gemini is ruled by Mercury", "My 12th house is Gemini"]
+@@example_hashes << ex_10
   end
 end
