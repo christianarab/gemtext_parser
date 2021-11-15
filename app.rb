@@ -31,7 +31,7 @@ module Gemtext
 
     def self.check_heading line
       puts "... Checking line(s) formatting ..."
-      if line.include? "# "
+      if line.start_with? "# "
         puts "Line(s) parsed: #{line}"
         puts "True: Is formatted as a Gemtext level-1-heading."
         true
