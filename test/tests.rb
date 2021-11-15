@@ -7,7 +7,8 @@ class TestParser < Test::Unit::TestCase
   include Seeds::Examples
 
   def setup
-    @@example_hashes
+    @@example_set_1
+    @@example_set_2
     @file = File.open 'text.gmi'
   end
   
@@ -16,7 +17,13 @@ class TestParser < Test::Unit::TestCase
   end
 
   def test_examples
-    @@example_hashes.each do |hash|
+    @@example_set_1.each do |hash|
+      input = hash["input"]
+      parsed_value = Gemtext::Parser.start input
+      puts parsed_value
+      assert_equal hash["expected"], parsed_value
+    end
+    @@example_set_2.each do |hash|
       input = hash["input"]
       parsed_value = Gemtext::Parser.start input
       puts parsed_value
