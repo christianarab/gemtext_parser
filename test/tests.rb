@@ -9,6 +9,7 @@ class TestParser < Test::Unit::TestCase
   def setup
     @@example_set_1
     @@example_set_2
+    @@example_heading_1_set
     @file = File.open 'text.gmi'
   end
   
@@ -17,17 +18,26 @@ class TestParser < Test::Unit::TestCase
   end
 
   def test_examples
-    @@example_set_1.each do |hash|
-      input = hash["input"]
-      parsed_value = Gemtext::Parser.start input
+    @@example_set_1.each do |example|
+      input = example["input"]
+      parsed_value = start input
       puts parsed_value
-      assert_equal hash["expected"], parsed_value
+      assert_equal example["expected"], parsed_value
     end
-    @@example_set_2.each do |hash|
-      input = hash["input"]
-      parsed_value = Gemtext::Parser.start input
+    @@example_set_2.each do |example|
+      input = example["input"]
+      parsed_value = start input
       puts parsed_value
-      assert_equal hash["expected"], parsed_value
+      assert_equal example["expected"], parsed_value
+    end
+
+    def test_heading_1
+      @@example_heading_1_set.each do |example|
+        input = example["input"]
+        result = check_heading example
+        puts result
+        assert_equal example["expected"], result
+      end
     end
   end
 end

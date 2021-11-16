@@ -13,7 +13,10 @@ module Gemtext
     # Gemini quote
     # ["> "]
 
-    def self.parse line
+    # Gemini pre-formatted text
+    # ["```", "```"]
+
+    def parse line
       if line.length < 0 or !line.is_a? String
         raise StandardError.new "Error: Not a string!"
       else
@@ -24,12 +27,12 @@ module Gemtext
       end
     end
 
-    def self.start input
+    def start input
       input.to_s
       parse input
     end
 
-    def self.check_heading line
+    def check_heading line
       puts "... Checking line(s) formatting ..."
       if line.start_with? "# "
         puts "Line(s) parsed: #{line}"

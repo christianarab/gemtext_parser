@@ -1,8 +1,9 @@
 module Seeds
   module Examples
 
-@@example_set_1 = []
-@@example_set_2 = []
+@@example_set_1 = Array.new
+@@example_set_2 = Array.new
+@@example_heading_1_set = Array.new
 
 # Example 1: I expect 2 elements in an array, 1th index as an 'empty' string.
 ex_1 = Hash.new
@@ -266,5 +267,29 @@ one,
 STRING
 ex_20["expected"] = ["# Testing", "one,  ", "  three,", ",,,two           "]
 @@example_set_2 << ex_20
+
+# Example 21: I expect this to return true, formatted as heading-1.
+ex_21 = Hash.new
+ex_21["input"] = <<-STRING
+# My heading  
+STRING
+ex_21["expected"] = true
+@@example_heading_1_set << ex_21
+
+# Example 22: I expect this to return false, not formatted as heading-1.
+ex_22 = Hash.new
+ex_22["input"] = <<-STRING
+## Testing
+STRING
+ex_22["expected"] = false
+@@example_heading_1_set << ex_22
+
+# Example 23: I expect ["# Testing", "one,  ", "  three,", ",,,two           "] as an array.
+ex_23 = Hash.new
+ex_23["input"] = <<-STRING
+# New heading
+STRING
+ex_23["expected"] = true
+@@example_heading_1_set << ex_23
   end
 end
