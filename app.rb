@@ -1,6 +1,5 @@
 module Gemtext
   module Parser
-
     # Gemini links
     # ["=> "]
 
@@ -16,33 +15,30 @@ module Gemtext
     # Gemini pre-formatted text
     # ["```", "```"]
 
-    def parse line
-      if line.length < 0 or !line.is_a? String
+    # Parses input. Raises error if input is not a string.
+    def parse input
+      if input.length < 0 or !input.is_a? String
         raise StandardError.new "Error: Not a string!"
       else
-        check_heading line
         parsed_output = []
-        line.each_line { |ln| parsed_output << ln.chomp }
+        input.each_line { |ln| parsed_output << ln.chomp }
         parsed_output
       end
     end
+    
+    # Checks input formatting. True if input is formatted as a Gemtext level-1-heading. Otherwise, false.
+    def is_h1? input
+      if input.start_with? "# "
+        true
+      else
+        false
+      end
+    end
 
+    # Starts parser.
     def start input
       input.to_s
       parse input
-    end
-
-    def check_heading line
-      puts "... Checking line(s) formatting ..."
-      if line.start_with? "# "
-        puts "Line(s) parsed: #{line}"
-        puts "True: Is formatted as a Gemtext level-1-heading."
-        true
-      else
-        puts "Line(s) parsed: #{line}"
-        puts "False: Is not formatted Gemtext level-1-heading."
-        false
-      end
     end
   end
 end

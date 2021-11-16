@@ -1,10 +1,12 @@
-module Seeds
-  module Examples
+require '../app.rb'
+require 'test/unit'
 
-@@example_set_1 = Array.new
-@@example_set_2 = Array.new
-@@example_heading_1_set = Array.new
+class TestParser < Test::Unit::TestCase
+  include Gemtext::Parser
 
+  def setup
+    @@parser_examples = Array.new
+    @file = File.open 'text.gmi'
 # Example 1: I expect 2 elements in an array, 1th index as an 'empty' string.
 ex_1 = Hash.new
 ex_1["input"] = <<-STRING
@@ -12,7 +14,7 @@ ex_1["input"] = <<-STRING
 
 STRING
 ex_1["expected"] = ["0th element", ""]
-@@example_set_1 << ex_1
+@@parser_examples << ex_1
 
 # Example 2: I expect " " as an array.
 ex_2 = Hash.new
@@ -20,7 +22,7 @@ ex_2["input"] = <<-STRING
  
 STRING
 ex_2["expected"] = [" "]
-@@example_set_1 << ex_2
+@@parser_examples << ex_2
 
 # Example 3: I expect ["", ""] as an array.
 ex_3 = Hash.new
@@ -29,7 +31,7 @@ ex_3["input"] = <<-STRING
 
 STRING
 ex_3["expected"] = ["", ""]
-@@example_set_1 << ex_3
+@@parser_examples << ex_3
 
 # Example 4: I expect ["   ", "  ", " "] as an array.
 ex_4 = Hash.new
@@ -39,7 +41,7 @@ ex_4["input"] = <<-STRING
  
 STRING
 ex_4["expected"] = ["   ", "  ", " "]
-@@example_set_1 << ex_4
+@@parser_examples << ex_4
 
 # Example 5: I expect ["", "# This is a level 1 heading", ""] as an array.
 ex_5 = Hash.new
@@ -49,7 +51,7 @@ ex_5["input"] = <<-STRING
 
 STRING
 ex_5["expected"] = ["", "# This is a level 1 heading", ""]
-@@example_set_1 << ex_5
+@@parser_examples << ex_5
 
 # Example 6: I expect ["","","# This is a level 1 heading","",""] as an array.
 ex_6 = Hash.new
@@ -61,7 +63,7 @@ ex_6["input"] = <<-STRING
 
 STRING
 ex_6["expected"] = ["","","# This is a level 1 heading","",""]
-@@example_set_1 << ex_6
+@@parser_examples << ex_6
 
 # Example 7: I expect ["## This is a level 2 heading"] as an array.
 ex_7 = Hash.new
@@ -69,7 +71,7 @@ ex_7["input"] = <<-STRING
 ## This is a level 2 heading
 STRING
 ex_7["expected"] = ["## This is a level 2 heading"]
-@@example_set_1 << ex_7
+@@parser_examples << ex_7
 
 # Example 8: I expect ["", "", "# This is once", "", "## This is twice", "", 
 # "### This is thrice", "", "This is fource", "", "And then what is this?", ""] as an array.
@@ -90,7 +92,7 @@ And then what is this?
 STRING
 ex_8["expected"] = ["", "", "# This is once", "", "## This is twice", "", 
                   "### This is thrice", "", "This is fource", "", "And then what is this?", ""]
-@@example_set_1 << ex_8
+@@parser_examples << ex_8
 
 # Example 9: I expect ["Hello world!", "=> apple/default.gmni  🗀 A is for Apple", "=> banana/default.gmni 🗀 B is for Banana", 
 # "=> cherry/default.gmni 🗀 C is for Cherry"] as an array.
@@ -103,7 +105,7 @@ Hello world!
 STRING
 ex_9["expected"] = ["Hello world!", "=> apple/default.gmni  🗀 A is for Apple", "=> banana/default.gmni 🗀 B is for Banana", 
                     "=> cherry/default.gmni 🗀 C is for Cherry"] 
-@@example_set_1 << ex_9
+@@parser_examples << ex_9
 
 # Example 10: I expect ["Gemini is ruled by Mercury", "My 12th house is Gemini"] as an array
 ex_10 = Hash.new
@@ -112,7 +114,7 @@ Gemini is ruled by Mercury
 My 12th house is Gemini
 STRING
 ex_10["expected"] = ["Gemini is ruled by Mercury", "My 12th house is Gemini"]
-@@example_set_1 << ex_10
+@@parser_examples << ex_10
   
 # Example 11: I expect ln. 129-130 as an array.
 ex_11 = Hash.new
@@ -129,7 +131,7 @@ More to come .   .    .
 STRING
 ex_11["expected"] = ["", "# Capsules", "## The first 3", "=> gemini://example.com/alpha.gmni", "=> gemini://example.com/beta.gmni", 
                     "=> gemini://example.com/gamma.gmni", "", "More to come .   .    .", ""]
-@@example_set_2 << ex_11
+@@parser_examples << ex_11
 
 # Example 12: I expect ln. 145-148 as an array
 ex_12 = Hash.new
@@ -147,7 +149,7 @@ ex_12["expected"] = [
                     "- William Lilly's Christian Astrology (1st ed. 1647, reprinted 1985 Regulus)",
                     ""
                     ]
-@@example_set_2 << ex_12
+@@parser_examples << ex_12
 
 # Example 13: I expect ["```","gemini supports preformatted text", "```", "=> gemini://example.com/example.gmni"] as an array.
 ex_13 = Hash.new
@@ -158,7 +160,7 @@ gemini supports preformatted text
 => gemini://example.com/example.gmni
 STRING
 ex_13["expected"] = ["```","gemini supports preformatted text", "```", "=> gemini://example.com/example.gmni"]
-@@example_set_2 << ex_13
+@@parser_examples << ex_13
 
 # Example 14: I expect ln. 173-182 as an array.
 ex_14 = Hash.new
@@ -182,7 +184,7 @@ ex_14["expected"] = [
                     "because he is next above the sphere of the moon, which is closest to the earth; and to change quickly from one to the other,",
                     "inspired as it were by the speed of his motion in the neighbourhood of the sun itself."
                     ]
-@@example_set_2 << ex_14
+@@parser_examples << ex_14
 
 # Example 15: I expect ln. 199-208 as an array.
 ex_15 = Hash.new
@@ -206,7 +208,7 @@ ex_15["expected"] = [
                     "* Ancient Astrology in Theory and Practice: A Manual of Traditional Techniques, Volume I: Assessing Planetary Condition by Demetra George",
                     "* Carmen Astrologicum: The 'Umar al-Tabari Translation by Dorotheus of Sidon & 'Umar al-Tabari",
                     ]
-@@example_set_2 << ex_15
+@@parser_examples << ex_15
 
 # Example 16: I expect ["* heights", "* blood pressure", "* anxiety"] as an array.
 ex_16 = Hash.new
@@ -216,7 +218,7 @@ ex_16["input"] = <<-STRING
 * anxiety
 STRING
 ex_16["expected"] = ["* heights", "* blood pressure", "* anxiety"]
-@@example_set_2 << ex_16
+@@parser_examples << ex_16
 
 # Example 17: I expect ["## Heights", "## Blood Pressure", "", "", "", "## Anxiety"] as an array.
 ex_17 = Hash.new
@@ -229,7 +231,7 @@ ex_17["input"] = <<-STRING
 ## Anxiety
 STRING
 ex_17["expected"] = ["## Heights", "## Blood Pressure", "", "", "", "## Anxiety"]
-@@example_set_2 << ex_17
+@@parser_examples << ex_17
 
 # Example 18: I expect ["```", "He is", "Set to self-destruct", "Self-destruct", "Self-destruct", "```", "- Lyrics by The Slits, Instant Hit"] as an array.
 ex_18 = Hash.new
@@ -243,7 +245,7 @@ Self-destruct
 - Lyrics by The Slits, Instant Hit
 STRING
 ex_18["expected"] = ["```", "He is", "Set to self-destruct", "Self-destruct", "Self-destruct", "```", "- Lyrics by The Slits, Instant Hit"]
-@@example_set_2 << ex_18
+@@parser_examples << ex_18
 
 # Example 19: I expect ["# Tic", "### Toc", "## Tic", "## Tic", "# Toc"] as an array.
 ex_19 = Hash.new
@@ -255,7 +257,7 @@ ex_19["input"] = <<-STRING
 # Toc
 STRING
 ex_19["expected"] = ["# Tic", "### Toc", "## Tic", "## Tic", "# Toc"]
-@@example_set_2 << ex_19
+@@parser_examples << ex_19
 
 # Example 20: I expect ["# Testing", "one,  ", "  three,", ",,,two           "] as an array.
 ex_20 = Hash.new
@@ -266,30 +268,18 @@ one,
 ,,,two           
 STRING
 ex_20["expected"] = ["# Testing", "one,  ", "  three,", ",,,two           "]
-@@example_set_2 << ex_20
+@@parser_examples << ex_20
+  end
+  
+  def test_is_input_valid_file?
+    assert_equal File, @file.class
+  end
 
-# Example 21: I expect this to return true, formatted as heading-1.
-ex_21 = Hash.new
-ex_21["input"] = <<-STRING
-# My heading  
-STRING
-ex_21["expected"] = true
-@@example_heading_1_set << ex_21
-
-# Example 22: I expect this to return false, not formatted as heading-1.
-ex_22 = Hash.new
-ex_22["input"] = <<-STRING
-## Testing
-STRING
-ex_22["expected"] = false
-@@example_heading_1_set << ex_22
-
-# Example 23: I expect ["# Testing", "one,  ", "  three,", ",,,two           "] as an array.
-ex_23 = Hash.new
-ex_23["input"] = <<-STRING
-# New heading
-STRING
-ex_23["expected"] = true
-@@example_heading_1_set << ex_23
+  def test_examples
+    @@parser_examples.each do |example|
+      parsed_result = start example["input"]
+      puts "Parsed example output: #{parsed_result}"
+      assert_equal example["expected"], parsed_result
+    end
   end
 end
