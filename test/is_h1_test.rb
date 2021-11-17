@@ -22,13 +22,60 @@ STRING
 ex_2["expected"] = false
 @@h1_examples << ex_2
 
-# Example 3: I expect ["# Testing", "one,  ", "  three,", ",,,two           "] as an array.
+# Example 3: I expect this to return true.
 ex_3 = Hash.new
 ex_3["input"] = <<-STRING
 # New heading
 STRING
 ex_3["expected"] = true
 @@h1_examples << ex_3
+
+# Example 4: I expect this to return false
+ex_4 = Hash.new
+ex_4["input"] = <<-STRING
+## Not a level-1 heading
+STRING
+ex_4["expected"] = false
+@@h1_examples << ex_4
+
+# Example 5: I expect this to return false
+ex_5 = Hash.new
+ex_5["input"] = <<-STRING
+## Not a level-1 heading
+STRING
+ex_5["expected"] = false
+@@h1_examples << ex_5
+
+# Example 6: I expect this to return false
+ex_6 = Hash.new
+ex_6["input"] = <<-STRING
+
+
+
+# A level-1 heading???
+STRING
+ex_6["expected"] = false
+@@h1_examples << ex_6
+
+# Example 7: I expect this to return true.
+ex_7 = Hash.new
+ex_7["input"] = <<-STRING
+# A level-1 heading???
+## What will this do, when I add this here?
+STRING
+ex_7["expected"] = true
+@@h1_examples << ex_7
+
+# Example 8: I expect this to return false
+ex_8 = Hash.new
+ex_8["input"] = <<-STRING
+## A level-2 heading to begin
+# Then a level-1?
+# What will happen?
+STRING
+ex_8["expected"] = false
+@@h1_examples << ex_8
+
   end
   
   def test_is_h1?
