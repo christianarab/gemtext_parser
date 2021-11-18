@@ -26,9 +26,27 @@ module Gemtext
       end
     end
     
-    # Checks input formatting. True if input is formatted as a Gemtext level-1-heading. Otherwise, false.
+    # True if input is gemini text level-1-heading. Otherwise, false.
     def is_h1? input
       if input.start_with? "# "
+        true
+      else
+        false
+      end
+    end
+
+    # True if input is gemini text level-2-heading. Otherwise, false.
+    def is_h2? input
+      if input.start_with? "## "
+        true
+      else
+        false
+      end
+    end
+
+    # True if input is gemini text level-3-heading. Otherwise, false.
+    def is_h3? input
+      if input.start_with? "### "
         true
       else
         false
