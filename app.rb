@@ -43,6 +43,15 @@ module Gemtext
         false
       end
     end
+    
+    # True if input is gemini text level-3-heading. Otherwise, false.
+    def is_h3? input
+      if input.start_with? "### "
+        true
+      else
+        false
+      end
+    end
 
     # Starts parser.
     def start input
