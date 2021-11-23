@@ -10,7 +10,7 @@ class TestParser < Test::Unit::TestCase
     # Example 1
     ex_1 = Hash.new
     ex_1["input"] = ["", "This is", "# A test", "## To see", "### if this", "* function", "", "", "> works"]
-    ex_1["expected"] = ["uf", "uf", "h1", "h2", "h3", "li", "uf", "uf", "bq"]
+    ex_1["expected"] = ["p", "p", "h1", "h2", "h3", "li", "p", "p", "bq"]
     @check_format_examples << ex_1
 
     # Example 2
@@ -22,7 +22,7 @@ class TestParser < Test::Unit::TestCase
     # Example 3
     ex_3 = Hash.new
     ex_3["input"] = [" ", "normal", "*list", "## a header"]
-    ex_3["expected"] = ["uf", "uf", "li", "h2"]
+    ex_3["expected"] = ["p", "p", "li", "h2"]
     @check_format_examples << ex_3
 
     # Example 4
@@ -34,7 +34,7 @@ class TestParser < Test::Unit::TestCase
     # Example 5
     ex_5 = Hash.new
     ex_5["input"] = ["", ",", " .. ", "  / / " ]
-    ex_5["expected"] = ["uf", "uf", "uf", "uf"]
+    ex_5["expected"] = ["p", "p", "p", "p"]
     @check_format_examples << ex_5
 end
 
@@ -42,14 +42,14 @@ end
     @check_format_examples.each do |example|
       expected = Array.new
       example["expected"].map { |val| expected << val }
-        check_format_result = check_format example["input"]
-        check_format_result.each_with_index do |result, index|
-          puts "value: #{result["string"]}"
-          puts "check_format type: #{result["type"]}" 
-          puts "expected value: #{expected[index]}"
-          puts "--------"
-          assert_equal expected[index], result["type"]
-        end
+      check_format_result = check_format example["input"]
+      check_format_result.each_with_index do |result, index|
+        puts "value: #{result["string"]}"
+        puts "check_format type: #{result["type"]}" 
+        puts "expected value: #{expected[index]}"
+        puts "--------"
+        assert_equal expected[index], result["type"]
       end
+    end
   end
 end

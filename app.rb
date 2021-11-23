@@ -31,11 +31,11 @@ module Gemtext
         when is_li?(line)
           pair["type"] = "li"
         else
-          pair["type"] = "uf"
+          pair["type"] = "p"
         end
         pairs << pair
       end
-        pairs
+      pairs
     end
 
     # True if input is gemini text level-1-heading. Otherwise, false.
