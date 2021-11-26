@@ -34,12 +34,12 @@ STRING
 ex_3["expected"] = false
 @@li_examples << ex_3
 
-# Example 4: I expect this to return true.
+# Example 4: I expect this to return false.
 ex_4 = Hash.new
 ex_4["input"] = <<-STRING
 ** A list item of a list item??!?
 STRING
-ex_4["expected"] = true
+ex_4["expected"] = false
 @@li_examples << ex_4
 
 # Example 5: I expect this to return false.
