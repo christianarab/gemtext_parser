@@ -1,8 +1,8 @@
-require '../app.rb'
+require_relative '../lib/is_bq.rb'
 require 'test/unit'
 
 class TestParser < Test::Unit::TestCase
-  include Gemtext::Parser
+  include IsBq
 
   def setup
     @@bq_examples = Array.new

@@ -1,9 +1,9 @@
-require '../app.rb'
+require_relative '../lib/check_format.rb'
 require 'test/unit'
 
 class TestParser < Test::Unit::TestCase
-  include Gemtext::Parser
-
+  include CheckFormat
+  
   def setup
     @check_format_examples = Array.new
 

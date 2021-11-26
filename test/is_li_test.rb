@@ -1,8 +1,8 @@
-require '../app.rb'
+require_relative '../lib/is_li.rb'
 require 'test/unit'
 
 class TestParser < Test::Unit::TestCase
-  include Gemtext::Parser
+  include IsLi
 
   def setup
     @@li_examples = Array.new

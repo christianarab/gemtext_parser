@@ -1,8 +1,10 @@
-require '../app.rb'
+require_relative '../lib/parser.rb'
+require_relative '../lib/start.rb'
 require 'test/unit'
 
 class TestParser < Test::Unit::TestCase
-  include Gemtext::Parser
+  include Parser
+  include Start
 
   def setup
     @@parser_examples = Array.new
