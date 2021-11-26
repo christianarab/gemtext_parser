@@ -1,9 +1,9 @@
-require '../app.rb'
+require_relative '../lib/is_h3.rb'
 require 'test/unit'
 
 class TestParser < Test::Unit::TestCase
-  include Gemtext::Parser
-
+  include IsH3
+  
   def setup
     @@h3_examples = Array.new
 # Example 1: I expect this to return true, formatted as heading-3.

@@ -1,8 +1,8 @@
-require '../app.rb'
+require_relative '../lib/is_h1.rb'
 require 'test/unit'
 
 class TestParser < Test::Unit::TestCase
-  include Gemtext::Parser
+  include IsH1
 
   def setup
     @@h1_examples = Array.new
