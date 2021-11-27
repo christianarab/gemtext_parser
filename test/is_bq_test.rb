@@ -38,7 +38,7 @@ ex_4 = Hash.new
 ex_4["input"] = <<-STRING
 ># Capsule
 STRING
-ex_4["expected"] = true
+ex_4["expected"] = false
 @@bq_examples << ex_4
 
 # Example 5: I expect this to return false.
