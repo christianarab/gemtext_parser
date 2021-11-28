@@ -6,6 +6,6 @@ module ParseH3
   private
   # Parses level-3-heading. If input starts with "### ", return string without type prefix. Else, input.
   def parse_h3 input
-    is_h3?(input) ? input[PrefixH3.length..-2] : input.chomp
+    is_h3?(input) ? input[PrefixH3.length..-1] : (raise StandardError.new "Input not formatted as level-3-heading.")
   end
 end
