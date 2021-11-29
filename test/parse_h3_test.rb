@@ -64,14 +64,14 @@ class TestParser < Test::Unit::TestCase
     @passing_examples << ex_5
   end
   
-  def test_parse_h1
+  def test_parse_h3
     @passing_examples.each do |example|
       h3_result = parse_h3 example["input"]
       assert_equal example["expected"], h3_result
     end
   end
 
-  def test_parse_h1_errors
+  def test_parse_h3_errors
     @std_error_examples.each do |example|
       assert_raise StandardError do
         parse_h3 example["input"]
