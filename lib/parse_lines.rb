@@ -41,8 +41,3 @@ module ParseLines
     pairs
   end
 end
-
-include ParseLines
-
-puts parse_lines "## Hello there"
-puts parse_lines "Hello there"
