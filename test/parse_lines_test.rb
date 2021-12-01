@@ -9,9 +9,9 @@ class TestParser < Test::Unit::TestCase
 
     # Example 1
     ex_1 = Hash.new
-    ex_1["input"] = [" ", "This is", "# A test", "## To see", "### if this", "* function", " ", " ", "> works"]
+    ex_1["input"] = ["", "This is", "# A test", "## To see", "### if this", "* function", "", "", "> works"]
     ex_1["type_expected"] = ["p", "p", "h1", "h2", "h3", "li", "p", "p", "bq"]
-    ex_1["string_expected"] = [" ", "This is", "A test", "To see", "if this", "function", " ", " ", "works"]
+    ex_1["string_expected"] = ["", "This is", "A test", "To see", "if this", "function", "", "", "works"]
     @parse_lines_examples << ex_1
 
     # Example 2
@@ -23,9 +23,9 @@ class TestParser < Test::Unit::TestCase
 
     # Example 3
     ex_3 = Hash.new
-    ex_3["input"] = [" ", "normal", "* list", "## a header"]
+    ex_3["input"] = ["", "normal", "* list", "## a header"]
     ex_3["type_expected"] = ["p", "p", "li", "h2"]
-    ex_3["string_expected"] = [" ", "normal", "list", "a header"]
+    ex_3["string_expected"] = ["", "normal", "list", "a header"]
     @parse_lines_examples << ex_3
 
     # Example 4
@@ -37,9 +37,9 @@ class TestParser < Test::Unit::TestCase
 
     # Example 5
     ex_5 = Hash.new
-    ex_5["input"] = [" ", ",", " .. ", "  / / " ]
+    ex_5["input"] = ["", ",", " .. ", "  / / " ]
     ex_5["type_expected"] = ["p", "p", "p", "p"]
-    ex_5["string_expected"] = [" ", ",", " .. ", "  / / " ]
+    ex_5["string_expected"] = ["", ",", " .. ", "  / / " ]
     @parse_lines_examples << ex_5
   end
 
