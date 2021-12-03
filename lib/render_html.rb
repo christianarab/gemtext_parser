@@ -8,7 +8,7 @@ module RenderHTML
   def render_html input
     html_strings = parse_lines input
     html_strings.each do |string|
-      return "<#{string["type"]}>#{string["string"]}</#{string["type"]}>"
+      return "<#{string["type"]}>#{string["string"].encode!(:xml => :text)}</#{string["type"]}>"
     end
   end
 end

@@ -42,6 +42,30 @@ class TestHTMLRender < Test::Unit::TestCase
     ex_6["input"] = ["Banana phone 13"]
     ex_6["string_expected"] = "<p>Banana phone 13</p>"
     @render_html_examples << ex_6
+
+    # Example 7
+    ex_7 = Hash.new
+    ex_7["input"] = ["Banana & Almond Milk & Kale & Ginger & Blueberry"]
+    ex_7["string_expected"] = "<p>Banana &amp; Almond Milk &amp; Kale &amp; Ginger &amp; Blueberry</p>"
+    @render_html_examples << ex_7
+
+    # Example 8
+    ex_8 = Hash.new
+    ex_8["input"] = ["> 1 > 0"]
+    ex_8["string_expected"] = "<bq>1 &gt; 0</bq>"
+    @render_html_examples << ex_8
+
+    # Example 9
+    ex_9 = Hash.new
+    ex_9["input"] = ["> 1 < 2"]
+    ex_9["string_expected"] = "<bq>1 &lt; 2</bq>"
+    @render_html_examples << ex_9
+
+    # Example 10
+    ex_10 = Hash.new
+    ex_10["input"] = ["¢£¥€©®"]
+    ex_10["string_expected"] = "<p>¢£¥€©®</p>"
+    @render_html_examples << ex_10
   end
 
   def test_render_html
