@@ -1,14 +1,39 @@
-require_relative 'parse_lines.rb'
+require_relative 'type_prefix.rb'
 
 module RenderHTML
-  include ParseLines
+  include PrefixTypes
 
   private 
-  # Renders parsed_lines output as HTML formatted strings.
-  def render_html input
-    html_strings = parse_lines input
-    html_strings.each do |string|
-      return "<#{string["type"]}>#{string["string"].encode!(:xml => :text)}</#{string["type"]}>"
+  # Expects an array of a pair with "type" & "string". Outputs an array of HTML formatted strings.
+  def render_html pairs
+    result = []
+    if !pairs.is_a? Array
+      raise StandardError.new("Input must be an array.")
     end
+    pairs.each do |pair|
+      if !pair.key?("type") 
+        raise StandardError.new("Pairs must have a key of: type")
+      end
+      if !pair.key?("string") 
+        raise StandardError.new("Pairs must have a key of: string")
+      end
+    end
+    pairs.each do |pair|
+      case true
+        when pair["type"] == PrefixH1 || pair["type"] == "h1"
+          result << "<h1>#{pair["string"].encode!(:xml => :text)}</h1>"
+        when pair["type"] == PrefixH2 || pair["type"] == "h2"
+          result << "<h2>#{pair["string"].encode!(:xml => :text)}</h2>"
+        when pair["type"] == PrefixH3 || pair["type"] == "h3"
+          result << "<h3>#{pair["string"].encode!(:xml => :text)}</h3>"
+        when pair["type"] == PrefixLi || pair["type"] == "li"
+          result << "<li>#{pair["string"].encode!(:xml => :text)}</li>"
+        when pair["type"] == PrefixBq || pair["type"] == "bq"
+          result << "<blockquote>#{pair["string"].encode!(:xml => :text)}</blockquote>"
+        else 
+          result << "<p>#{pair["string"].encode!(:xml => :text)}</p>"
+        end
+      end
+    result.join("\n")
   end
 end
