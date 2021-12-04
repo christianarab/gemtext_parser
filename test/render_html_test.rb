@@ -10,31 +10,31 @@ class TestHTMLRender < Test::Unit::TestCase
 
     # Example 1
     ex_1 = Hash.new
-    ex_1["input"] = [{"type" => "h1", "string" => "This is an H1"}, {"type" => "# ", "string" => "Also an H1"}]
-    ex_1["string_expected"] = "<h1>This is an H1</h1>\n<h1>Also an H1</h1>"
+    ex_1["input"] = [{"type" => "h1", "string" => "This is an H1"}, {"type" => "h2", "string" => "Also an H2"}]
+    ex_1["string_expected"] = "<h1>This is an H1</h1>\n<h2>Also an H2</h2>"
     @render_html_examples << ex_1
 
     # Example 2
     ex_2 = Hash.new
-    ex_2["input"] = [{"type" => "h2", "string" => "This is an H2"}, {"type" => "## ", "string" => "Also an H2"}]
-    ex_2["string_expected"] = "<h2>This is an H2</h2>\n<h2>Also an H2</h2>"
+    ex_2["input"] = [{"type" => "h2", "string" => "This is an H2"}, {"type" => "h3", "string" => "Also an H3"}]
+    ex_2["string_expected"] = "<h2>This is an H2</h2>\n<h3>Also an H3</h3>"
     @render_html_examples << ex_2
 
     # Example 3
     ex_3 = Hash.new
-    ex_3["input"] = [{"type" => "h3", "string" => "This is an H3"}, {"type" => "### ", "string" => "Also an H3"}]
-    ex_3["string_expected"] = "<h3>This is an H3</h3>\n<h3>Also an H3</h3>"
+    ex_3["input"] = [{"type" => "h3", "string" => "This is an H3"}, {"type" => "p", "string" => "Hello, text."}]
+    ex_3["string_expected"] = "<h3>This is an H3</h3>\n<p>Hello, text.</p>"
     @render_html_examples << ex_3
 
     # Example 4
     ex_4 = Hash.new
-    ex_4["input"] = [{"type" => "li", "string" => "barbell"}, {"type" => "* ", "string" => "straps"}]
+    ex_4["input"] = [{"type" => "li", "string" => "barbell"}, {"type" => "li", "string" => "straps"}]
     ex_4["string_expected"] = "<li>barbell</li>\n<li>straps</li>"
     @render_html_examples << ex_4
 
     # Example 5
     ex_5 = Hash.new
-    ex_5["input"] = [{"type" => "bq", "string" => "What labels me,"}, {"type" => "> ", "string" => "negates me."}]
+    ex_5["input"] = [{"type" => "bq", "string" => "What labels me,"}, {"type" => "bq", "string" => "negates me."}]
     ex_5["string_expected"] = "<blockquote>What labels me,</blockquote>\n<blockquote>negates me.</blockquote>"
     @render_html_examples << ex_5
 
