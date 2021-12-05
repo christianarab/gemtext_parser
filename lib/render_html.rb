@@ -1,14 +1,17 @@
-require_relative 'type_prefix.rb'
+require_relative 'type_values.rb'
 
 module RenderHTML
+  include TypeValues
 
   private 
   # Expects an array of a pair with "type" & "string". Outputs a string of HTML formatted strings.
   def render_html pairs
     result = []
+    
     if !pairs.is_a? Array
       raise StandardError.new("Input must be an array.")
     end
+
     pairs.each do |pair|
       if !pair.key?("type") 
         raise StandardError.new("Pairs must have a key of: type")
@@ -17,22 +20,25 @@ module RenderHTML
         raise StandardError.new("Pairs must have a key of: string")
       end
     end
+
     pairs.each do |pair|
-      case true
-        when pair["type"] == "h1"
-          result << "<h1>#{pair["string"].encode!(:xml => :text)}</h1>"
-        when pair["type"] == "h2"
-          result << "<h2>#{pair["string"].encode!(:xml => :text)}</h2>"
-        when pair["type"] == "h3"
-          result << "<h3>#{pair["string"].encode!(:xml => :text)}</h3>"
-        when pair["type"] == "li"
-          result << "<li>#{pair["string"].encode!(:xml => :text)}</li>"
-        when pair["type"] == "bq"
+      case pair["type"]
+        when TypeBq
           result << "<blockquote>#{pair["string"].encode!(:xml => :text)}</blockquote>"
-        else 
+        when TypeH1
+          result << "<h1>#{pair["string"].encode!(:xml => :text)}</h1>"
+        when TypeH2
+          result << "<h2>#{pair["string"].encode!(:xml => :text)}</h2>"
+        when TypeH3
+          result << "<h3>#{pair["string"].encode!(:xml => :text)}</h3>"
+        when TypeLi
+          result << "<li>#{pair["string"].encode!(:xml => :text)}</li>"
+        when TypeP
           result << "<p>#{pair["string"].encode!(:xml => :text)}</p>"
-        end
+        else
+          raise StandardError.new("Type value error.")
       end
+    end
     result.join("\n")
   end
 end

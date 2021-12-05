@@ -1,8 +1,10 @@
 require_relative '../lib/render_html.rb'
+require_relative '../lib/type_values.rb'
 require 'test/unit'
 
 class TestHTMLRender < Test::Unit::TestCase
   include RenderHTML
+  include TypeValues
   
   def setup
     @render_html_examples = Array.new
@@ -10,61 +12,61 @@ class TestHTMLRender < Test::Unit::TestCase
 
     # Example 1
     ex_1 = Hash.new
-    ex_1["input"] = [{"type" => "h1", "string" => "This is an H1"}, {"type" => "h2", "string" => "Also an H2"}]
+    ex_1["input"] = [{"type" => TypeH1, "string" => "This is an H1"}, {"type" => TypeH2, "string" => "Also an H2"}]
     ex_1["string_expected"] = "<h1>This is an H1</h1>\n<h2>Also an H2</h2>"
     @render_html_examples << ex_1
 
     # Example 2
     ex_2 = Hash.new
-    ex_2["input"] = [{"type" => "h2", "string" => "This is an H2"}, {"type" => "h3", "string" => "Also an H3"}]
+    ex_2["input"] = [{"type" => TypeH2, "string" => "This is an H2"}, {"type" => TypeH3, "string" => "Also an H3"}]
     ex_2["string_expected"] = "<h2>This is an H2</h2>\n<h3>Also an H3</h3>"
     @render_html_examples << ex_2
 
     # Example 3
     ex_3 = Hash.new
-    ex_3["input"] = [{"type" => "h3", "string" => "This is an H3"}, {"type" => "p", "string" => "Hello, text."}]
+    ex_3["input"] = [{"type" => TypeH3, "string" => "This is an H3"}, {"type" => TypeP, "string" => "Hello, text."}]
     ex_3["string_expected"] = "<h3>This is an H3</h3>\n<p>Hello, text.</p>"
     @render_html_examples << ex_3
 
     # Example 4
     ex_4 = Hash.new
-    ex_4["input"] = [{"type" => "li", "string" => "barbell"}, {"type" => "li", "string" => "straps"}]
+    ex_4["input"] = [{"type" => TypeLi, "string" => "barbell"}, {"type" => TypeLi, "string" => "straps"}]
     ex_4["string_expected"] = "<li>barbell</li>\n<li>straps</li>"
     @render_html_examples << ex_4
 
     # Example 5
     ex_5 = Hash.new
-    ex_5["input"] = [{"type" => "bq", "string" => "What labels me,"}, {"type" => "bq", "string" => "negates me."}]
+    ex_5["input"] = [{"type" => TypeBq, "string" => "What labels me,"}, {"type" => TypeBq, "string" => "negates me."}]
     ex_5["string_expected"] = "<blockquote>What labels me,</blockquote>\n<blockquote>negates me.</blockquote>"
     @render_html_examples << ex_5
 
     # Example 6
     ex_6 = Hash.new
-    ex_6["input"] = [{"type" => "p", "string" => "Banana phone 13"}]
+    ex_6["input"] = [{"type" => TypeP, "string" => "Banana phone 13"}]
     ex_6["string_expected"] = "<p>Banana phone 13</p>"
     @render_html_examples << ex_6
 
     # Example 7
     ex_7 = Hash.new
-    ex_7["input"] = [{"type" => "p", "string" => "Banana & Almond Milk & Kale & Ginger & Blueberry"}]
+    ex_7["input"] = [{"type" => TypeP, "string" => "Banana & Almond Milk & Kale & Ginger & Blueberry"}]
     ex_7["string_expected"] = "<p>Banana &amp; Almond Milk &amp; Kale &amp; Ginger &amp; Blueberry</p>"
     @render_html_examples << ex_7
 
     # Example 8
     ex_8 = Hash.new
-    ex_8["input"] = [{"type" => "h2", "string" => "1 > 0"}]
+    ex_8["input"] = [{"type" => TypeH2, "string" => "1 > 0"}]
     ex_8["string_expected"] = "<h2>1 &gt; 0</h2>"
     @render_html_examples << ex_8
 
     # Example 9
     ex_9 = Hash.new
-    ex_9["input"] = [{"type" => "h3", "string" => "1 < 2"}]
+    ex_9["input"] = [{"type" => TypeH3, "string" => "1 < 2"}]
     ex_9["string_expected"] = "<h3>1 &lt; 2</h3>"
     @render_html_examples << ex_9
 
     # Example 10
     ex_10 = Hash.new
-    ex_10["input"] = [{"type" => "h3", "string" => "1 << 2"}]
+    ex_10["input"] = [{"type" => TypeH3, "string" => "1 << 2"}]
     ex_10["string_expected"] = "<h3>1 &lt;&lt; 2</h3>"
     @render_html_examples << ex_10
 
@@ -82,6 +84,11 @@ class TestHTMLRender < Test::Unit::TestCase
     ex_13 = Hash.new
     ex_13["input"] = [{"type" => "Missing the string."}]
     @std_error_examples << ex_13
+
+    # StandardError Example #3: Missing key of 'string' in pair.
+    ex_14 = Hash.new
+    ex_14["input"] = [{"type" => "eyw*273_1903cca", "string" => "Dummy text."}]
+    @std_error_examples << ex_14
   end
 
   def test_render_html
