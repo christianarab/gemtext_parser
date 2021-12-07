@@ -27,12 +27,11 @@ module RenderHTML
       if !pair.key?("type") 
         raise StandardError.new("Pairs must have a key of: type")
       end
+
       if !pair.key?("string") 
         raise StandardError.new("Pairs must have a key of: string")
       end
-    end
 
-    pairs.each do |pair|
       case pair["type"]
         when TypeBq
           result << "<blockquote>#{pair["string"].encode!(:xml => :text)}</blockquote>"
