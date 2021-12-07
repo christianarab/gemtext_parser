@@ -1,13 +1,24 @@
 require_relative 'type_values.rb'
+require 'erb'
 
 module RenderHTML
   include TypeValues
-
+  
   private 
+
+  HTML_TEMPLATE = ERB.new "<!DOCTYPE html>\n<html>\n<head></head>\n<body>\n<%= yield %>\n</body>\n</html>"
+
+  def get_binding
+    binding
+  end
+
+  def render
+    HTML_TEMPLATE.result get_binding { yield } 
+  end
   # Expects an array of a pair with "type" & "string". Outputs a string of HTML formatted strings.
   def render_html pairs
     result = []
-    
+
     if !pairs.is_a? Array
       raise StandardError.new("Input must be an array.")
     end
@@ -39,6 +50,6 @@ module RenderHTML
           raise StandardError.new("Type value error.")
       end
     end
-    result.join("\n")
+    renderedHTML = render {result.join("\n")}
   end
 end
