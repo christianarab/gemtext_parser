@@ -5,4 +5,5 @@ module TypeValues
   TypeH3 = "h3"
   TypeLi = "li"
   TypeP  = "p"
+  TypeLink = "a"
 end
