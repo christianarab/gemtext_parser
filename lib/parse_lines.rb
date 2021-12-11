@@ -3,6 +3,7 @@ require_relative 'parse_h2.rb'
 require_relative 'parse_h3.rb'
 require_relative 'parse_bq.rb'
 require_relative 'parse_li.rb'
+require_relative 'parse_link.rb'
 require_relative 'parser.rb'
 require_relative 'type_values.rb'
 
@@ -13,6 +14,7 @@ module ParseLines
   include ParseH3 
   include ParseBq 
   include ParseLi 
+  include ParseLink
   include TypeValues
 
   private
@@ -37,6 +39,10 @@ module ParseLines
           pair = {"type" => TypeBq, "string" => parse_bq(line)}
         when is_li?(line)
           pair = {"type" => TypeLi, "string" => parse_li(line)}
+        when is_link?(line)
+          parsed_link = parse_link(line)
+          pair = {"type" => TypeLink}.merge! *parsed_link
+          pair.merge! *parsed_link
         else
           pair = {"type" => TypeP, "string" => line }
       end

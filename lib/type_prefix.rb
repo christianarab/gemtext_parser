@@ -4,5 +4,5 @@ module PrefixTypes
   PrefixH2 = "## "
   PrefixH3 = "### "
   PrefixLi = "* "
-  PrefixLink = "=> "
+  PrefixLink = "=>"
 end
