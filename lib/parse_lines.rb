@@ -42,7 +42,6 @@ module ParseLines
         when is_link?(line)
           parsed_link = parse_link(line)
           pair = {"type" => TypeLink}.merge! *parsed_link
-          pair.merge! *parsed_link
         else
           pair = {"type" => TypeP, "string" => line }
       end
