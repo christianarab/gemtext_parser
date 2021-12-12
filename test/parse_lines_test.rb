@@ -43,6 +43,30 @@ class TestParser < Test::Unit::TestCase
     ex_5["type_expected"] = [TypeP, TypeP, TypeP, TypeP]
     ex_5["string_expected"] = ["", ",", " .. ", "  / / " ]
     @parse_lines_examples << ex_5
+
+    # Example 6
+    ex_6 = Hash.new
+    ex_6["input"] = ["=> http://whatwillthisdo.ca hmm", "normal", "* list", "## a header"]
+    ex_6["type_expected"] = [TypeLink, TypeP, TypeLi, TypeH2]
+    ex_6["string_expected"] = ["hmm", "normal", "list", "a header"]
+    ex_6["url_expected"] = ["http://whatwillthisdo.ca"]
+    @parse_lines_examples << ex_6
+
+    # Example 7
+    ex_7 = Hash.new
+    ex_7["input"] = ["=> http://example.com Example page", "# Example", "## Example ", "### Examples"]
+    ex_7["type_expected"] = [TypeLink, TypeH1, TypeH2, TypeH3]
+    ex_7["string_expected"] = ["Example page", "Example", "Example ", "Examples"]
+    ex_7["url_expected"] = ["http://example.com"]
+    @parse_lines_examples << ex_7
+
+    # Example 8
+    ex_8 = Hash.new
+    ex_8["input"] = ["=> http://example1.com Example 1", "=>gopher://example2.com Example 2 ", "=>             smtp://example.com Example 3"]
+    ex_8["type_expected"] = [TypeLink, TypeLink, TypeLink]
+    ex_8["string_expected"] = ["Example 1", "Example 2", "Example 3"]
+    ex_8["url_expected"] = ["http://example1.com", "gopher://example2.com", "smtp://example.com"]
+    @parse_lines_examples << ex_8
   end
 
   def test_parse_lines
@@ -51,12 +75,16 @@ class TestParser < Test::Unit::TestCase
       example["type_expected"].map { |val| type_expected << val }
       string_expected = Array.new
       example["string_expected"].map { |val| string_expected << val }
+      url_expected = Array.new
+      if example["url_expected"] then example["url_expected"].map { |val| url_expected << val } end
+      puts "Here is what is expected: #{string_expected}"
       parse_lines_result = parse_lines example["input"]
       parse_lines_result.each_with_index do |result, index|
-        puts "string value: #{result["input"]}"
+        puts "string value: #{result["string"]}"
         puts "parse_lines type: #{result["type"]}" 
         puts "expected type: #{type_expected[index]}"
         puts "expected string: #{string_expected[index]}"
+        puts "expected url: #{url_expected[index]}"
         puts "--------"
         assert_equal type_expected[index], result["type"]
         assert_equal string_expected[index], result["string"]
