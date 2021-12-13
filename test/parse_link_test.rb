@@ -10,7 +10,7 @@ class TestParser < Test::Unit::TestCase
 
     # StandardError Example #1
     ex_1 = Hash.new
-    ex_1["input"] = "=> notformated.com corrently"
+    ex_1["input"] = "               => notformated.com corrently"
     @std_error_examples << ex_1
 
     # StandardError Example #2
@@ -20,17 +20,17 @@ class TestParser < Test::Unit::TestCase
 
     # StandardError Example #3
     ex_3 = Hash.new
-    ex_3["input"] = "=> www.stillnot.com formatted"
+    ex_3["input"] = "= www.stillnot.com formatted"
     @std_error_examples << ex_3
 
     # StandardError Example #4
     ex_4 = Hash.new
-    ex_4["input"] = "not => working"
+    ex_4["input"] = "!b => !a"
     @std_error_examples << ex_4
 
     # StandardError Example #5
     ex_5 = Hash.new
-    ex_5["input"] = "=> not correct!"
+    ex_5["input"] = "not correct!"
     @std_error_examples << ex_5
 
     # Passing Example #1
