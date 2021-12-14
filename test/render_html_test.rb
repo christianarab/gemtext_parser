@@ -73,19 +73,19 @@ class TestHTMLRender < Test::Unit::TestCase
     # Example 11
     ex_11 = Hash.new
     ex_11["input"] = [{"type" => TypeLink, "url" => "https://www.example.com/", "string" => "Example Site"}]
-    ex_11["string_expected"] = "<!DOCTYPE html>\n<html>\n<head></head>\n<body>\n<a href='https://www.example.com/'>Example Site</a>\n</body>\n</html>"
+    ex_11["string_expected"] = "<!DOCTYPE html>\n<html>\n<head></head>\n<body>\n<div><a href='https://www.example.com/'>Example Site</a></div>\n</body>\n</html>"
     @render_html_examples << ex_11
 
     # Example 12
     ex_12 = Hash.new
     ex_12["input"] = [{"type" => TypeH1, "string" => "Capsule"}, {"type" => TypeLink, "url" => "gemini://mycapsule.com", "string" => "Example Capsule"}]
-    ex_12["string_expected"] = "<!DOCTYPE html>\n<html>\n<head></head>\n<body>\n<h1>Capsule</h1>\n<a href='gemini://mycapsule.com'>Example Capsule</a>\n</body>\n</html>"
+    ex_12["string_expected"] = "<!DOCTYPE html>\n<html>\n<head></head>\n<body>\n<h1>Capsule</h1>\n<div><a href='gemini://mycapsule.com'>Example Capsule</a></div>\n</body>\n</html>"
     @render_html_examples << ex_12
 
     # Example 13
     ex_13 = Hash.new
     ex_13["input"] = [{"type" => TypeH3, "string" => "A link"}, {"type" => TypeLink, "url" => "fun.ca", "string" => "Funny video"}]
-    ex_13["string_expected"] = "<!DOCTYPE html>\n<html>\n<head></head>\n<body>\n<h3>A link</h3>\n<a href='fun.ca'>Funny video</a>\n</body>\n</html>"
+    ex_13["string_expected"] = "<!DOCTYPE html>\n<html>\n<head></head>\n<body>\n<h3>A link</h3>\n<div><a href='fun.ca'>Funny video</a></div>\n</body>\n</html>"
     @render_html_examples << ex_13
 
     # StandardError Example #1: Not an array.

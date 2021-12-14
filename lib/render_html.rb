@@ -46,7 +46,7 @@ module RenderHTML
         when TypeP
           result << "<p>#{pair["string"].encode!(:xml => :text)}</p>"
         when TypeLink
-          result << "<a href='#{pair["url"].encode!(:xml => :text)}'>#{pair["string"].encode!(:xml => :text)}</a>"
+          result << "<div><a href='#{pair["url"].encode!(:xml => :text)}'>#{pair["string"].encode!(:xml => :text)}</a></div>"
         else
           raise StandardError.new("Type value error.")
       end
