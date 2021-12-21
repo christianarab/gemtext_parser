@@ -10,67 +10,31 @@ class TestGemtextLines < Test::Unit::TestCase
 
 ex_1 = Hash.new
 ex_1["input"] = <<-STRING
-# Review Documents to Review
+# A title
 
-* Poetry Review
-* Film Review
-* Review Review
+Hello world!
 STRING
-ex_1["expected"] = ["# Review Documents to Review", "", "* Poetry Review", "* Film Review", "* Review Review"]
+ex_1["expected"] = "# A title"
 @gemtext_examples << ex_1
 
 ex_2 = Hash.new
-ex_2["input"] = <<-STRING
-The jargon that I know
-
-
-means a lot
-
-
-STRING
-ex_2["expected"] = ["The jargon that I know", "", "", "means a lot", "", ""]
+ex_2["input"] = "# A title\n\nHello world!\n"
+ex_2["expected"] = "# A title"
 @gemtext_examples << ex_2
 
 ex_3 = Hash.new
-ex_3["input"] = <<-STRING
-  baked beans
-touching soggy 
-scramble
-
-the teflon pan
-
-scratch never with metal
-the end.
-STRING
-ex_3["expected"] = ["  baked beans", "touching soggy ", "scramble", "", "the teflon pan", "", "scratch never with metal", "the end." ]
+ex_3["input"] = "# A title\r\rHello world!\r"
+ex_3["expected"] = "# A title"
 @gemtext_examples << ex_3
 
 ex_4 = Hash.new
-ex_4["input"] = <<-STRING
-holy
-moonga, you are a
-soft soul that left
-the coffee sweet
-the nicest oak burns in
-saturday's fire
-friends will be there
-we will miss you our
-holy moonga
-
-https://www.gofundme.com/f/support-for-moongas-family-friends
-STRING
-ex_4["expected"] = ["holy", "moonga, you are a", "soft soul that left", "the coffee sweet", "the nicest oak burns in", "saturday's fire", "friends will be there", "we will miss you our", "holy moonga", "", "https://www.gofundme.com/f/support-for-moongas-family-friends" ]
+ex_4["input"] = "# A title\u0085\u0085Hello world!\u0085"
+ex_4["expected"] = "# A title"
 @gemtext_examples << ex_4
 
 ex_5 = Hash.new
-ex_5["input"] = <<-STRING
-Here in Toronto. We have a lot of food and condos.
-
-Everything is great here.    in Toronto.      
-
-    ... or is it!?  
-STRING
-ex_5["expected"] = ["Here in Toronto. We have a lot of food and condos.", "", "Everything is great here.    in Toronto.      ", "", "    ... or is it!?  "]
+ex_5["input"] = "\u0085# A title\u0085\u0085Hello world!\u0085"
+ex_5["expected"] = ""
 @gemtext_examples << ex_5
 
 ex_6 = Hash.new
