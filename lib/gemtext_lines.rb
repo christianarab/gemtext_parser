@@ -9,18 +9,19 @@ module GemtextLines
     if !string.is_a? String
       raise StandardError.new "Error: Not a string!"
     else
-      arr = []
+      lines, line = [], []
       string.each_char do |char| 
         case char
-        when DelimitLineFeed, 
-             DelimitLineCarriage, 
-             DelimitNextLine
-          break
+        when DelimitLineFeed, DelimitLineCarriage, DelimitNextLine
+          lines << line.join
+          line = []
+          next
         else
-          arr << char
+          line << char
         end
       end
-      arr.join.chomp # returns string
+      lines << line.join
     end
+    lines
   end
 end
