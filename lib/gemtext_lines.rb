@@ -20,7 +20,9 @@ module GemtextLines
           line << char
         end
       end
-      lines << line.join
+      if line != []
+        lines << line.join
+      end
     end
     lines
   end

@@ -9,28 +9,28 @@ class TestGemtextLines < Test::Unit::TestCase
     @std_error_examples = Array.new
 
 ex_1 = Hash.new
-ex_1["input"] = "# The Title\n\nHello world!\n* one\n* two\n* three"
+ex_1["input"] = "# The Title\n\nHello world!\n* one\n* two\n* three\n"
 ex_1["expected"] = ["# The Title", "", "Hello world!", "* one", "* two", "* three"]
 @gemtext_examples << ex_1
 
 ex_2 = Hash.new
-ex_2["input"] = "# A title\n\nHello world!"
-ex_2["expected"] = ["# A title", "", "Hello world!"]
+ex_2["input"] = "# The Title\n\nHello world!\n* one\n* two\n* three"
+ex_2["expected"] = ["# The Title", "", "Hello world!", "* one", "* two", "* three"]
 @gemtext_examples << ex_2
 
 ex_3 = Hash.new
 ex_3["input"] = "# A title\r\rHello world!\r\r"
-ex_3["expected"] = ["# A title", "", "Hello world!", "", ""]
+ex_3["expected"] = ["# A title", "", "Hello world!", ""]
 @gemtext_examples << ex_3
 
 ex_4 = Hash.new
 ex_4["input"] = "# A title\u0085\u0085Hello world!\u0085"
-ex_4["expected"] = ["# A title", "", "Hello world!", ""]
+ex_4["expected"] = ["# A title", "", "Hello world!"]
 @gemtext_examples << ex_4
 
 ex_5 = Hash.new
 ex_5["input"] = "\u0085# A title\u0085\u0085Hello world!\u0085"
-ex_5["expected"] = ["", "# A title", "", "Hello world!", ""]
+ex_5["expected"] = ["", "# A title", "", "Hello world!"]
 @gemtext_examples << ex_5
 
 ex_6 = Hash.new
