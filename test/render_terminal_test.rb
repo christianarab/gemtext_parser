@@ -41,28 +41,13 @@ class TestTerminalRender < Test::Unit::TestCase
     @render_terminal_examples << ex_6
 
     ex_7 = Hash.new
-    ex_7["input"] = [{"type" => TypeP, "string" => "This text is red.", "color" => "red"}]
-    ex_7["string_expected"] = ["\e[31mThis text is red."]
+    ex_7["input"] = [{"type" => TypeP, "string" => "Test test."}]
+    ex_7["string_expected"] = ["Test test."]
     @render_terminal_examples << ex_7
 
     ex_8 = Hash.new
-    ex_8["input"] = [{"type" => TypeP, "string" => "This text is green.", "color" => "green"}]
-    ex_8["string_expected"] = ["\e[32mThis text is green."]
-    @render_terminal_examples << ex_8
-
-    ex_9 = Hash.new
-    ex_9["input"] = [{"type" => TypeP, "string" => "This text is blue.", "color" => "blue"}]
-    ex_9["string_expected"] = ["\e[34mThis text is blue."]
-    @render_terminal_examples << ex_9
-
-    ex_10 = Hash.new
-    ex_10["input"] = [{"type" => TypeP, "string" => "Test test."}]
-    ex_10["string_expected"] = ["Test test."]
-    @render_terminal_examples << ex_10
-
-    ex_11 = Hash.new
-    ex_11["input"] = [{"type" => "111111111111", "string" => "Dummy text."}]
-    @std_error_examples << ex_11
+    ex_8["input"] = [{"type" => "111111111111", "string" => "Dummy text."}]
+    @std_error_examples << ex_8
   end
 
   def test_render_terminal

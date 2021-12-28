@@ -6,19 +6,6 @@ module RenderTerminal
   
   private 
 
-  def text_color color
-    case color
-    when "red"
-      "\u001b[31m"
-    when "green"
-      "\u001b[32m"
-    when "blue"
-      "\u001b[34m"
-    else
-      nil
-    end
-  end
-
   def render_terminal pairs
     result = []
 
@@ -33,11 +20,6 @@ module RenderTerminal
 
       if !pair.key?("string") 
         raise StandardError.new("Pairs must have a key of: string")
-      end
-
-      if pair.key?("color")
-        color = text_color pair["color"]
-        if color then pair["string"].prepend(color) else nil end
       end
 
       case pair["type"]
