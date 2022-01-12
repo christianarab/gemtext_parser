@@ -12,13 +12,13 @@ module Transcode
   private
 
   def transcode(input, output_type)
-    input = gemtext_lines input 
-    lines = parse_lines input
+    lines = gemtext_lines input 
+    pair = parse_lines lines
     case output_type
     when 'terminal'
-      render_terminal lines
+      render_terminal pairs
     when 'html'
-      render_html lines
+      render_html pairs
     else
       StandardError.new "Incorrect output type. Must be 'terminal', or 'html'."
     end
