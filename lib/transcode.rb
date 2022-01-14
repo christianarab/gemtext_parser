@@ -13,7 +13,7 @@ module Transcode
 
   def transcode(input, output_type)
     lines = gemtext_lines input 
-    pair = parse_lines lines
+    pairs = parse_lines lines
     case output_type
     when 'terminal'
       render_terminal pairs
