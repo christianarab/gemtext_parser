@@ -1,5 +1,5 @@
-require_relative '../lib/parse_lines.rb'
-require_relative '../lib/type_values.rb'
+require_relative '../parse_lines.rb'
+require_relative '../type_values.rb'
 require 'test/unit'
 
 class TestParser < Test::Unit::TestCase

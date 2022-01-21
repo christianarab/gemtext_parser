@@ -1,5 +1,5 @@
-require_relative '../lib/render_terminal.rb'
-require_relative '../lib/type_values.rb'
+require_relative '../render_terminal.rb'
+require_relative '../type_values.rb'
 require 'test/unit'
 
 class TestTerminalRender < Test::Unit::TestCase

@@ -1,4 +1,4 @@
-require_relative '../lib/is_li.rb'
+require_relative '../is_li.rb'
 require 'test/unit'
 
 class TestParser < Test::Unit::TestCase

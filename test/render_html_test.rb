@@ -1,5 +1,5 @@
-require_relative '../lib/render_html.rb'
-require_relative '../lib/type_values.rb'
+require_relative '../render_html.rb'
+require_relative '../type_values.rb'
 require 'test/unit'
 
 class TestHTMLRender < Test::Unit::TestCase

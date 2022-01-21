@@ -1,4 +1,4 @@
-require_relative '../lib/gemtext_lines.rb'
+require_relative '../gemtext_lines.rb'
 require 'test/unit'
 
 class TestGemtextLines < Test::Unit::TestCase

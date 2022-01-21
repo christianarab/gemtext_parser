@@ -1,4 +1,4 @@
-require_relative './lib/start.rb'
+require_relative 'start.rb'
 
 module Gemtext
   module Parser

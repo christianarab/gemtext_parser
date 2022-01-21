@@ -1,4 +1,4 @@
-require_relative '../lib/transcode.rb'
+require_relative '../transcode.rb'
 require 'test/unit'
 
 class TranscodeTest < Test::Unit::TestCase
